@@ -15,8 +15,8 @@ namespace ConsoleApp4
             int resultSumm = 0;
             int aliquotThree = 3;
             int aliquotFife = 5;
-            Random rand = new Random();
-            int number = rand.Next(bottomBorder, topBorder);
+            Random random = new Random();
+            int number = random.Next(bottomBorder, topBorder);
 
             while (number > 0)
             {
