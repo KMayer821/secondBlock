@@ -1,0 +1,27 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int numberOfIterationOfCycle;
+            string userMessage;
+
+            Console.WriteLine("Введите выводимое сообщение: ");
+            userMessage = Console.ReadLine();
+            Console.WriteLine("Введите количество выводимых сообщений: ");
+            numberOfIterationOfCycle = Convert.ToInt32(Console.ReadLine());
+            
+            for (int i = 0; i<numberOfIterationOfCycle; i++)
+            {
+                Console.WriteLine(userMessage);
+            }
+        }
+    }
+}
