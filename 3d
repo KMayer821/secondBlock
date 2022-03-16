@@ -1,0 +1,23 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int maxNumber = 100;
+            int step = 7;
+            int cycleStart = 5;
+
+            for (int i = cycleStart; i < maxNumber; i+=7)
+            {
+                Console.WriteLine(i);
+            }
+        }
+    }
+}
