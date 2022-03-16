@@ -10,11 +10,13 @@ namespace ConsoleApp4
     {
         static void Main(string[] args)
         {
-            Random rand = new Random();
-            int number = rand.Next(1,100);
+            int bottomBorder = 0;
+            int topBorder = 100;
             int resultSumm = 0;
             int aliquotThree = 3;
             int aliquotFife = 5;
+            Random rand = new Random();
+            int number = rand.Next(bottomBorder, topBorder);
 
             while (number > 0)
             {
@@ -30,3 +32,4 @@ namespace ConsoleApp4
         }
     }
 }
+
