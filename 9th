@@ -10,25 +10,21 @@ namespace ConsoleApp9
     {
         static void Main(string[] args)
         {
-            int N = 10;
+            int number = 10;
             int topBorder = 1000;
             int bottomBorder = 100;
             int counter = 0;
             int enumiration = 0;
-            while (true)
+            while (enumiration != topBorder)
             {
                 enumiration += 1;
-                int resultChecker = N* enumiration;
+                int resultChecker = number * enumiration;
                 if (resultChecker >= bottomBorder && resultChecker < topBorder)
                 {
                     counter += 1;
                 }
-                if (enumiration == topBorder)
-                {
-                    Console.WriteLine(counter);
-                    break;
-                }
             }
+            Console.WriteLine(counter);
         }
     }
 }
