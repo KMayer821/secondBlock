@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp6
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            DateTime now = DateTime.Now;
+            Random random = new Random();
+            string userInput = "help";
+            while (true)
+            {
+                
+                if (userInput == "exit")
+                {
+                    break;
+                }
+                else if (userInput == "help") 
+                {
+                    Console.Clear();
+                    Console.WriteLine("Введите \"exit\" для выхода, \"date\" для вывода даты, \"random\" для вывода случайного числа (от 1 до 100)");
+                    Console.WriteLine("\"cls\" для отчистки консоли");
+                }
+                else if (userInput == "date")
+                {
+                    Console.WriteLine(now.ToString());
+                }
+                else if (userInput == "random")
+                {
+                    Console.WriteLine(random.Next(1,100));
+                }
+                else if (userInput == "cls")
+                {
+                    Console.Clear();
+                }
+                userInput = Console.ReadLine();
+            }
+        }
+    }
+}
