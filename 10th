@@ -13,9 +13,9 @@ namespace ConsoleApp10
             Random random = new Random();
             int referenceNumber = random.Next(1,1000);
             Console.WriteLine(referenceNumber);
-            bool multiple = true;
+            bool multiple = false;
             int saveNumber = referenceNumber;
-            while (multiple)
+            while (!multiple)
             {
                 int counter = 0;
                 while (referenceNumber % 2 != 1)
@@ -27,7 +27,7 @@ namespace ConsoleApp10
                 {
                     Console.WriteLine(counter);
                     Console.WriteLine(saveNumber);
-                    multiple = false;
+                    multiple = true;
                 }
                 saveNumber += 1;
                 referenceNumber = saveNumber;
