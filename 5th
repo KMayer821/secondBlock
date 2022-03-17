@@ -1,0 +1,82 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp5
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            float rubles = 1234f;
+            float dollars = 4321f;
+            float euro = 1337f;
+            float rublesToDollars = 100f;
+            float dollarsToRubles = 0.01f;
+            float rublesToEuro = 200f;
+            float euroToRubles = 0.05f;
+            float euroToDollars = 0.5f;
+            float dollarsToEuro = 2f;
+
+            while (true)
+            {
+                Console.WriteLine($"У вас на счету {rubles} рублей, {dollars} долларов и {euro} евро.");
+                Console.WriteLine("Выберите валюту, которую вы хотите продать (1 - рубли, 2 - доллары, 3 - евро)");
+                string userSellInput = Console.ReadLine();
+                if (userSellInput == "exit")
+                {
+                    break;
+                }
+                Console.WriteLine("Выберите валюту, которую вы хотите купить (1 - рубли, 2 - доллары, 3 - евро)");
+                string userBuyInput = Console.ReadLine();
+                if (userBuyInput == "exit")
+                {
+                    break;
+                }
+                Console.WriteLine("Какое количество валюты вы хотелы бы купить?");
+                int numberOfBuying = Convert.ToInt32(Console.ReadLine());
+                if (userSellInput == "1")
+                {
+                    if (userBuyInput == "2")
+                    {
+                        rubles -= numberOfBuying * rublesToDollars;
+                        dollars += numberOfBuying;
+                    }
+                    else if (userBuyInput == "3")
+                    {
+                        rubles -= numberOfBuying * rublesToEuro;
+                        euro += numberOfBuying;
+                    }
+                }
+                else if (userSellInput == "2")
+                {
+                    if (userBuyInput == "1")
+                    {
+                        dollars -= numberOfBuying * dollarsToRubles;
+                        rubles += numberOfBuying;
+                    }
+                    else if (userBuyInput == "3")
+                    {
+                        dollars -= numberOfBuying * dollarsToEuro;
+                        euro += numberOfBuying;
+                    }
+                }
+                else if (userSellInput == "3")
+                {
+                    if (userBuyInput == "1")
+                    {
+                        euro -= numberOfBuying * euroToRubles;
+                        rubles += numberOfBuying;
+                    }
+                    else if (userBuyInput == "2")
+                    {
+                        euro -= numberOfBuying * euroToDollars;
+                        dollars += numberOfBuying;
+                    }
+                }
+            }
+        }
+    }
+}
