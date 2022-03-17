@@ -1,0 +1,37 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp10
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Random random = new Random();
+            int referenceNumber = random.Next(1,1000);
+            Console.WriteLine(referenceNumber);
+            bool multiple = true;
+            int saveNumber = referenceNumber;
+            while (multiple)
+            {
+                int counter = 0;
+                while (referenceNumber % 2 != 1)
+                {
+                    referenceNumber /= 2;
+                    counter += 1;
+                }
+                if (referenceNumber == 1)
+                {
+                    Console.WriteLine(counter);
+                    Console.WriteLine(saveNumber);
+                    multiple = false;
+                }
+                saveNumber += 1;
+                referenceNumber = saveNumber;
+            }
+        }
+    }
+}
