@@ -10,15 +10,17 @@ namespace ConsoleApp10
     {
         static void Main(string[] args)
         {
+            int bottomBorderOfDiapason = 1;
+            int topBorderOfDiapason = 1000;
             Random random = new Random();
-            int referenceNumber = random.Next(1,1000);
+            int referenceNumber = random.Next(bottomBorderOfDiapason, topBorderOfDiapason);
             Console.WriteLine(referenceNumber);
             bool multiple = false;
             int saveNumber = referenceNumber;
             int counterStep = 1;
             int numberStep = 2;
 
-            while (!multiple)
+            while (multiple == false)
             {
                 int counter = 0;
                 while (referenceNumber % 2 != 1)
