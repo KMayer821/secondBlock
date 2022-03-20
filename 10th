@@ -15,13 +15,16 @@ namespace ConsoleApp10
             Console.WriteLine(referenceNumber);
             bool multiple = false;
             int saveNumber = referenceNumber;
+            int counterStep = 1;
+            int numberStep = 2;
+
             while (!multiple)
             {
                 int counter = 0;
                 while (referenceNumber % 2 != 1)
                 {
-                    referenceNumber /= 2;
-                    counter += 1;
+                    referenceNumber /= numberStep;
+                    counter += counterStep;
                 }
                 if (referenceNumber == 1)
                 {
