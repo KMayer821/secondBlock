@@ -1,0 +1,93 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp12
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int userHeroHP = 100;
+            int bossHP = 100;
+            int minumumHP = 0;
+            string spellSummonCall = "Призыв инкарната";
+            string spellSummonAttack = "Атака инкарната";
+            string spellHeal = "Лечение";
+            string spellAttack = "Атака";
+            bool summonAlife = false;
+            int userHeal = 15;
+            int minimumHeroDamage = 5;
+            int maximumHeroDamage = 20;
+            int minumumBossDamage = 5;
+            int maximumBossDamage = 30;
+            int minumumSummonDamage = 10;
+            int maximumSummonDamage = 40;
+
+            Random random = new Random();
+            Console.WriteLine("Ваши способности: \"Атака\";\n\"Призыв инкарната\";\n\"Атака инкарната\";\n\"Лечение\".\n");
+            while (userHeroHP > 0 && bossHP > 0)
+            {
+                int bossDamage = random.Next(minumumBossDamage, maximumBossDamage);
+                int userHeroDamage = random.Next(minimumHeroDamage, maximumHeroDamage);
+                int summonDamage = random.Next(minumumSummonDamage, maximumSummonDamage);
+                userHeroHP -= bossDamage;
+                Console.WriteLine($"BlackHat наносит по вам {bossDamage} урона");
+                if (userHeroHP < minumumHP)
+                {
+                    userHeroHP = minumumHP;
+                    Console.WriteLine("Вы проиграли.");
+                    break;
+                }
+                if (bossHP < minumumHP)
+                {
+                    bossHP = minumumHP;
+                    Console.WriteLine("Вы выиграли!");
+                    break;
+                }
+                Console.WriteLine($"У вас осталось: {userHeroHP} очков здоровья. У босса осталось {bossHP} очков здоровья.");
+                string userSpell = Console.ReadLine();
+
+                if (userSpell == spellAttack)
+                {
+                    bossHP -= userHeroDamage;
+                }
+                else if (userSpell == spellHeal)
+                {
+                    userHeroHP += userHeal;
+                    Console.WriteLine($"Вы вылечиваете себе 15 здоровья, теперь у вас {userHeroHP} очков здоровья.");
+                }
+                else if(userSpell == spellSummonCall)
+                {
+                    summonAlife = true;
+                }
+                else if(userSpell == spellSummonAttack)
+                {
+                    if (summonAlife == false)
+                    {
+                        Console.WriteLine("Вы приказываете акаковать своему инкарнату, но неожиданно обнаруживаете, что его рядом нет");
+                    }
+                    else
+                    {
+                        bossHP -= summonDamage;
+                        Console.WriteLine($"Ваш покорный слуга атакует BlackHat и наносит ему {summonDamage} урона, у BlackHat осталось {bossHP} очков здоровья");
+                    }
+                }
+                if(userHeroHP < minumumHP)
+                {
+                    userHeroHP = minumumHP;
+                    Console.WriteLine("Вы проиграли.");
+                    break;
+                }
+                if (bossHP < minumumHP)
+                {
+                    bossHP = minumumHP;
+                    Console.WriteLine("Вы выиграли!");
+                    break;
+                }
+            }
+        }
+    }
+}
