@@ -1,0 +1,51 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp11
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string brackets = "(()((())))";
+            int rightBracketsCounter = 0;
+            int rightConsecutiveBrackets = 0;
+            int leftBracketsCounter = 0;
+            int leftConsecutiveBrackets = 0;
+            foreach (char element in brackets)
+            {
+                if (element == '(')
+                {
+                    if (rightConsecutiveBrackets != 0)
+                    {
+                        rightConsecutiveBrackets = 0;
+                    }
+                    leftBracketsCounter += 1;
+                    leftConsecutiveBrackets += 1;
+                }
+                else if (element == ')')
+                {
+                    if(leftConsecutiveBrackets != 0)
+                    {
+                        leftConsecutiveBrackets = 0;
+                    }
+                    rightBracketsCounter += 1;
+                    rightConsecutiveBrackets += 1;
+                }
+            }
+            int maxBracketsDepth = Math.Max(rightConsecutiveBrackets, leftConsecutiveBrackets);
+            if (leftBracketsCounter == rightBracketsCounter)
+            {
+                Console.WriteLine("Выражение является корректным скобочным выражением.");
+                Console.WriteLine($"Максимальная глубина равна : {maxBracketsDepth} ");
+            }
+            else
+            {
+                Console.WriteLine("Выражение не является корректным скобочным выражением.");
+            }
+        }
+    }
+} 
