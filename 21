@@ -1,12 +1,16 @@
 using System;
-
+using System.Diagnostics;
 namespace ConsoleApp21
 {
     class Program
     {
         static void Main(string[] args)
         {
-            int[,] array = { {1,2,3},{4,5,6},{7,8,9} };
+            int[,] array = new int[3,3];
+            Random random = new Random();
+
+            int bottomBorderOfNumberDiapason = 0;
+            int topBorderOfNumberDiapason = 10;
             int indexOfCheckingRaw = 0;
             int indexOfCheckingColumn = 0;
             int firstRawSumm = 0;
@@ -16,19 +20,23 @@ namespace ConsoleApp21
             {
                 for (int j = 0; j < array.GetLength(1); j++)
                 {
+                    array[i, j] = random.Next(bottomBorderOfNumberDiapason, topBorderOfNumberDiapason);
                     Console.Write(array[i, j] + " ");
-                    if (j == indexOfCheckingColumn)
-                    {
-                        firstColumnMultiply *= array[i, j];
-                    }
-                    if (i == indexOfCheckingRaw)
-                    {
-                        firstRawSumm += array[i, j];
-                    }
                 }
                 Console.Write("\n");
             }
-            Console.WriteLine(firstRawSumm + " " + firstColumnMultiply);
+
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                firstColumnMultiply *= array[i, indexOfCheckingColumn];
+            }
+
+            for (int i = 0; i < array.GetLength(1); i++)
+            {
+                firstRawSumm += array[indexOfCheckingRaw, i];
+            }
+            Console.Write(firstRawSumm + " " + firstColumnMultiply);
         }
     }
 }
+
