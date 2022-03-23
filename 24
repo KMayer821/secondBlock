@@ -1,0 +1,44 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp24
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] array = new int[0]; ;
+            string stopWord = "exit";
+            string summWord = "sum";
+            string userInput = "";
+
+            while(Convert.ToString(userInput) != stopWord)
+            {
+                userInput = Console.ReadLine();
+                if (userInput == summWord)
+                {
+                    int summ = 0;
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        summ += array[i];
+                    }
+                    Console.WriteLine(summ);
+                }
+                else if (userInput != stopWord)
+                {
+                    int[] tempArray = new int[array.Length + 1];                    
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        tempArray[i] = array[i];
+                    }
+                    tempArray[tempArray.Length - 1] = Convert.ToInt32(userInput);
+                    array = tempArray;
+                    Console.Clear();
+                }
+            }
+        }
+    }
+}
