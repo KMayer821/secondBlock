@@ -1,0 +1,16 @@
+using System;
+namespace MyApp
+{
+    public static class Program
+    {
+        static void Main(string[] args)
+        {
+            string startString = "Мама мыла раму";
+            string[] subStrings = startString.Split(' ');
+            foreach(string subString in subStrings)
+            {
+                Console.WriteLine(subString);
+            }
+        }
+    }
+}
