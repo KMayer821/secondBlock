@@ -1,0 +1,113 @@
+using System;
+namespace MyApp
+{
+    public static class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] names = new string[0];
+            string[] jobs = new string[0];
+            string add = "добавить";
+            string output = "вывести";
+            string delete = "удалить";
+            string search = "поиск";
+            string exit = "выход";
+            string userInput = "";
+            Console.WriteLine($"Введие {add} для добавления сотрудника");
+            Console.WriteLine($"Введие {output} для отображения всех досье");
+            Console.WriteLine($"Введие {delete} для удаления досье");
+            Console.WriteLine($"Введие {search} для поиска сотрудника по фамилии");
+            Console.WriteLine($"Введие {exit} для выхода");
+
+            while (userInput != exit)
+            {
+                userInput = Console.ReadLine();
+
+                if (userInput == add)
+                {
+                    Console.Write("Введите имя нового сотрудника: ");
+                    string addName = Console.ReadLine();
+                    names = NewTitle(names, addName, names.Length);
+                    Console.Write("Введите должность нового сотрудника: ");
+                    string addJob = Console.ReadLine();
+                    jobs = NewTitle(jobs, addJob, jobs.Length);
+                }
+
+                else if (userInput == output)
+                {
+                    for(int i = 0; i < names.Length; i++)
+                    {
+                        Console.WriteLine($"{i+1}) {names[i]} - {jobs[i]}");
+                    }
+                }
+
+                else if (userInput == search)
+                {
+                    Console.Write("Введите фамилию человека, которого надо найти: ");
+                    string searchingName = Console.ReadLine();
+                    bool searchSuccess = false;
+                    for (int i = 0; i<names.Length; i++)
+                    {
+                        if (searchingName == names[i])
+                        {
+                            Console.WriteLine($"{names[i]} - {jobs[i]}");
+                            searchSuccess = true;
+                        }
+                    }
+                    if (searchSuccess == false)
+                    {
+                        Console.WriteLine("Такого сотрудника не найдено");
+                    }
+                }
+
+                else if (userInput == delete)
+                {
+                    Console.Write("Введите фамилию человека, которого надо удалить: ");
+                    string searchingName = Console.ReadLine();
+                    bool searchSuccess = false;
+                    for (int i = 0; i < names.Length; i++)
+                    {
+                        if (searchingName == names[i])
+                        {
+                            names = DeleteTitle(names, i, names.Length);
+                            jobs = DeleteTitle(jobs, i, jobs.Length);
+                            searchSuccess = true;
+                        }
+                    }
+                    if (searchSuccess == false)
+                    {
+                        Console.WriteLine("Такого сотрудника не найдено");
+                    }
+                }
+            }
+        }
+
+        static string[] NewTitle(string[] array, string value, int size)
+        {
+            string[] tempArray = new string[size + 1];
+            for (int i = 0; i < size; i++)
+            {
+                tempArray[i] = array[i];
+            }
+            tempArray[tempArray.Length - 1] = value;
+            return tempArray;
+        }
+
+        static string[] DeleteTitle(string[] array, int index, int size)
+        {
+            string[] tempArray = new string[size - 1];
+            int nextTempArrayIndex = 0;
+            for (int i = 0; i < size; i++)
+            {
+                if (i == index)
+                {
+                    continue;
+                }
+                tempArray[nextTempArrayIndex] = array[i];
+                nextTempArrayIndex++;
+            }
+            return tempArray;
+        }
+
+    }
+}
