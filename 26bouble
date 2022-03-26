@@ -1,0 +1,40 @@
+using System;
+
+namespace MyApp
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] array = new int[20];
+            Random random = new Random();
+            int bottomArrayBorder = 1;
+            int topArrayBorder = 50;
+            int tempArrayElement;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = random.Next(bottomArrayBorder, topArrayBorder);
+                Console.Write(array[i] + " ");
+            }
+            for (int j = 0; j < array.Length; j++)
+            {
+                for (int i = 0; i < array.Length - 1; i++)
+                {
+
+                    if (array[i] > array[i + 1])
+                    {
+                        tempArrayElement = array[i];
+                        array[i] = array[i + 1];
+                        array[i + 1] = tempArrayElement;
+                    }
+                }
+            }
+            Console.Write("\n");
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.Write(array[i] + " ");
+            }
+        }
+    }
+}
