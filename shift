@@ -1,0 +1,35 @@
+using System;
+namespace MyApp
+{
+    public static class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] array = { 1, 2, 3, 4, 5, 6, 7};
+            int shift = Console.Read();
+            int tempNumber;
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.Write(array[i] + " ");
+            }
+
+            for (int j = shift; j >= 0; j--)
+            {
+                tempNumber = array[0];
+                for (int i = 0; i < array.Length-1; i++)
+                {
+                    array[i] = array[i+1];
+                }
+                array[array.Length-1] = tempNumber;
+            }
+
+            Console.Write("\n");
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.Write(array[i] + " ");
+            }
+        }
+    }
+}
