@@ -1,0 +1,44 @@
+using System;
+
+namespace MyApp 
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] array = new int[30];
+            int bottomArrayBorder = 1;
+            int topArrayBorder = 5;
+            int rawCounter = 1;
+            int tempRawCounter = 1;
+            int checkingNumber = 0;
+            int savedNumber = 0;
+            Random random = new Random();
+            
+            for(int i = 0; i < array.Length; i++)
+            {
+                array[i] = random.Next(bottomArrayBorder, topArrayBorder);
+                Console.Write(array[i] + " ");
+            }
+
+            for(int i = 0; i < array.Length; i++)
+            {
+                if(array[i] == checkingNumber)
+                {
+                    tempRawCounter += 1;
+                }
+                else
+                {
+                    if (tempRawCounter > rawCounter)
+                    {
+                        rawCounter = tempRawCounter;
+                        savedNumber = checkingNumber;
+                    }
+                    tempRawCounter = 1;
+                    checkingNumber = array[i];
+                }
+            }
+            Console.Write("\n\nПодряд: " + rawCounter + " цифра: " + savedNumber);
+        }
+    }
+}
