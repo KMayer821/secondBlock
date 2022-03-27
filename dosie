@@ -1,5 +1,5 @@
 using System;
-namespace MyApp
+namespace ConsoleApp5
 {
     public static class Program
     {
@@ -13,6 +13,7 @@ namespace MyApp
             string search = "поиск";
             string exit = "выход";
             string userInput = "";
+            int errorCode = -1;
             Console.WriteLine($"Введие {add} для добавления сотрудника");
             Console.WriteLine($"Введие {output} для отображения всех досье");
             Console.WriteLine($"Введие {delete} для удаления досье");
@@ -25,89 +26,88 @@ namespace MyApp
 
                 if (userInput == add)
                 {
-                    Console.Write("Введите имя нового сотрудника: ");
-                    string addName = Console.ReadLine();
-                    names = NewTitle(names, addName, names.Length);
-                    Console.Write("Введите должность нового сотрудника: ");
-                    string addJob = Console.ReadLine();
-                    jobs = NewTitle(jobs, addJob, jobs.Length);
+                    AddTitle(ref names, ref jobs);
                 }
 
                 else if (userInput == output)
                 {
-                    for(int i = 0; i < names.Length; i++)
+                    for (int i = 0; i < names.Length; i++)
                     {
-                        Console.WriteLine($"{i+1}) {names[i]} - {jobs[i]}");
+                        Console.WriteLine($"{i + 1}) {names[i]} - {jobs[i]}");
                     }
                 }
 
                 else if (userInput == search)
                 {
-                    Console.Write("Введите фамилию человека, которого надо найти: ");
-                    string searchingName = Console.ReadLine();
-                    bool searchSuccess = false;
-                    for (int i = 0; i<names.Length; i++)
+                    int nameInex = SearchTitle(names);
+                    if (nameInex != errorCode)
                     {
-                        if (searchingName == names[i])
-                        {
-                            Console.WriteLine($"{names[i]} - {jobs[i]}");
-                            searchSuccess = true;
-                        }
-                    }
-                    if (searchSuccess == false)
-                    {
-                        Console.WriteLine("Такого сотрудника не найдено");
-                    }
+                        Console.WriteLine($"{names[nameInex]} - {jobs[nameInex]}");
+                    };
                 }
 
                 else if (userInput == delete)
                 {
-                    Console.Write("Введите фамилию человека, которого надо удалить: ");
-                    string searchingName = Console.ReadLine();
-                    bool searchSuccess = false;
-                    for (int i = 0; i < names.Length; i++)
-                    {
-                        if (searchingName == names[i])
-                        {
-                            names = DeleteTitle(names, i, names.Length);
-                            jobs = DeleteTitle(jobs, i, jobs.Length);
-                            searchSuccess = true;
-                        }
-                    }
-                    if (searchSuccess == false)
-                    {
-                        Console.WriteLine("Такого сотрудника не найдено");
-                    }
+                    DeleteTitle(ref names,ref jobs);
                 }
             }
         }
 
-        static string[] NewTitle(string[] array, string value, int size)
+        static void AddTitle(ref string[] names, ref string[] jobs)
         {
-            string[] tempArray = new string[size + 1];
-            for (int i = 0; i < size; i++)
+            
+            Console.Write("Введите имя нового сотрудника: ");
+            string addName = Console.ReadLine();
+            Console.Write("Введите должность нового сотрудника: ");
+            string addJob = Console.ReadLine();
+
+            string[] tempArrayNames = new string[names.Length + 1];
+            string[] tempArrayJobs = new string[jobs.Length + 1];
+            for (int i = 0; i < names.Length; i++)
             {
-                tempArray[i] = array[i];
+                tempArrayJobs[i] = jobs[i];
+                tempArrayNames[i] = names[i];
             }
-            tempArray[tempArray.Length - 1] = value;
-            return tempArray;
+            tempArrayJobs[tempArrayJobs.Length - 1] = addJob;
+            tempArrayNames[tempArrayNames.Length - 1] = addName;
+            jobs = tempArrayNames;
+            names = tempArrayNames;
         }
 
-        static string[] DeleteTitle(string[] array, int index, int size)
-        {
-            string[] tempArray = new string[size - 1];
+        static void DeleteTitle(ref string[] names, ref string[] jobs)
+        { 
+            int nameIndex = SearchTitle(names);
+            string[] tempNameArray = new string[names.Length - 1];
+            string[] tempJobsArray = new string[jobs.Length - 1];
             int nextTempArrayIndex = 0;
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < names.Length; i++)
             {
-                if (i == index)
+                if (i == nameIndex)
                 {
                     continue;
                 }
-                tempArray[nextTempArrayIndex] = array[i];
+                tempNameArray[nextTempArrayIndex] = names[i];
+                tempJobsArray[nextTempArrayIndex] = jobs[i];
                 nextTempArrayIndex++;
             }
-            return tempArray;
+            names = tempNameArray;
+            jobs = tempJobsArray;
         }
 
+        static int SearchTitle(string[] names)
+        {
+            int errorCode = -1;
+            Console.Write("Введите фамилию человека: ");
+            string searchingName = Console.ReadLine();
+            for (int i = 0; i <= names.Length; i++)
+            {
+                if (names[i] == searchingName)
+                {
+                    return i;
+                }
+            }
+            Console.WriteLine("Такого сотрудника не найдено");
+            return errorCode;
+        }
     }
 }
