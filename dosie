@@ -13,7 +13,6 @@ namespace ConsoleApp5
             string search = "поиск";
             string exit = "выход";
             string userInput = "";
-            int errorCode = -1;
             Console.WriteLine($"Введие {add} для добавления сотрудника");
             Console.WriteLine($"Введие {output} для отображения всех досье");
             Console.WriteLine($"Введие {delete} для удаления досье");
@@ -23,33 +22,39 @@ namespace ConsoleApp5
             while (userInput != exit)
             {
                 userInput = Console.ReadLine();
-
                 if (userInput == add)
                 {
                     AddTitle(ref names, ref jobs);
                 }
-
                 else if (userInput == output)
                 {
-                    for (int i = 0; i < names.Length; i++)
-                    {
-                        Console.WriteLine($"{i + 1}) {names[i]} - {jobs[i]}");
-                    }
+                    Output(names, jobs);
                 }
-
                 else if (userInput == search)
                 {
-                    int nameInex = SearchTitle(names);
-                    if (nameInex != errorCode)
-                    {
-                        Console.WriteLine($"{names[nameInex]} - {jobs[nameInex]}");
-                    };
+                    Output(SearchTitle(names), names, jobs);
                 }
-
                 else if (userInput == delete)
                 {
                     DeleteTitle(ref names,ref jobs);
                 }
+            }
+        }
+
+        static void Output(int nameInex, string[] names, string[] jobs)
+        {
+            int errorCode = -1;
+            if (nameInex != errorCode)
+            {
+                Console.WriteLine($"{names[nameInex]} - {jobs[nameInex]}");
+            };
+        }
+
+        static void Output(string[] names, string[] jobs)
+        {
+            for (int i = 0; i < names.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}) {names[i]} - {jobs[i]}");
             }
         }
 
@@ -59,38 +64,41 @@ namespace ConsoleApp5
             string addName = Console.ReadLine();
             Console.Write("Введите должность нового сотрудника: ");
             string addJob = Console.ReadLine();
-
-            string[] tempArrayNames = new string[names.Length + 1];
-            string[] tempArrayJobs = new string[jobs.Length + 1];
-            for (int i = 0; i < names.Length; i++)
-            {
-                tempArrayJobs[i] = jobs[i];
-                tempArrayNames[i] = names[i];
-            }
-            tempArrayJobs[tempArrayJobs.Length - 1] = addJob;
-            tempArrayNames[tempArrayNames.Length - 1] = addName;
-            jobs = tempArrayNames;
-            names = tempArrayNames;
+            names = ArrayExtension(names, addName);
+            jobs = ArrayExtension(jobs, addJob);
         }
 
+        static string[] ArrayExtension(string[] inputArray, string newElement)
+        {
+            string[] newArray = new string[inputArray.Length + 1];
+            for (int i = 0; i < inputArray.Length; i++)
+            {
+                newArray[i] = inputArray[i];
+            }
+            newArray[newArray.Length - 1] = newElement;
+            return newArray;
+        }
         static void DeleteTitle(ref string[] names, ref string[] jobs)
         { 
             int nameIndex = SearchTitle(names);
-            string[] tempNameArray = new string[names.Length - 1];
-            string[] tempJobsArray = new string[jobs.Length - 1];
+            names = ArrayReduction(names, nameIndex);
+            jobs = ArrayReduction(jobs, nameIndex);
+        }
+
+        static string[] ArrayReduction(string[] inputArray, int elementIndex)
+        {
+            string[] newArray = new string[inputArray.Length - 1];
             int nextTempArrayIndex = 0;
-            for (int i = 0; i < names.Length; i++)
+            for (int i = 0; i < inputArray.Length; i++)
             {
-                if (i == nameIndex)
+                if (i == elementIndex)
                 {
                     continue;
                 }
-                tempNameArray[nextTempArrayIndex] = names[i];
-                tempJobsArray[nextTempArrayIndex] = jobs[i];
+                newArray[nextTempArrayIndex] = inputArray[i];
                 nextTempArrayIndex++;
             }
-            names = tempNameArray;
-            jobs = tempJobsArray;
+            return newArray;
         }
 
         static int SearchTitle(string[] names)
