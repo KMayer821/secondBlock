@@ -55,7 +55,6 @@ namespace ConsoleApp5
 
         static void AddTitle(ref string[] names, ref string[] jobs)
         {
-            
             Console.Write("Введите имя нового сотрудника: ");
             string addName = Console.ReadLine();
             Console.Write("Введите должность нового сотрудника: ");
