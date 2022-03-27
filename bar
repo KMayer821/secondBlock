@@ -13,14 +13,16 @@ namespace ConsoleApp1
         
         static void ManaBar (int mana)
         {
-            int manaIndex = 10;
+            int barMaximum = 10;
+            int maximumMana = 10000;
+            int manaIndex = maximumMana / barMaximum;
             char[] bar = new char[manaIndex];
             mana /= manaIndex;
             for (int i = 0; i < mana; i++)
             {
                 bar[i] = '#';
             }
-            for (int i = mana; i < manaIndex; i++)
+            for (int i = mana; i < barMaximum; i++)
             {
                 bar[i] = '_';
             }
