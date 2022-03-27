@@ -1,0 +1,30 @@
+using System;
+
+namespace ConsoleApp1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Сколько у вас маны?");
+            int mana = Convert.ToInt32(Console.ReadLine());
+            ManaBar(mana);
+        }
+        
+        static void ManaBar (int mana)
+        {
+            int manaIndex = 10;
+            char[] bar = new char[manaIndex];
+            mana /= manaIndex;
+            for (int i = 0; i < mana; i++)
+            {
+                bar[i] = '#';
+            }
+            for (int i = mana; i < manaIndex; i++)
+            {
+                bar[i] = '_';
+            }
+            Console.WriteLine(bar);
+        }
+    }
+}
