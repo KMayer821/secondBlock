@@ -6,16 +6,20 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            TryToConvert();
-        }
-        
-        static int TryToConvert()
-        {
-            while (true)
+            int userNumber;
+            bool numberChecked = false;
+            while (numberChecked == false)
             {
-                int userNumber;
-                nt.TryParse(Console.ReadLine());
+                Console.WriteLine("Введите число");
+                numberChecked = TryToConvert(out userNumber);
             }
+            Console.WriteLine("Число введено");
+        }
+
+        static bool TryToConvert(out int userNumber)
+        {
+            string userInput = Console.ReadLine();
+            return (int.TryParse(userInput,out userNumber));
         }
     }
 }
