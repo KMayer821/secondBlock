@@ -32,22 +32,13 @@ namespace ConsoleApp5
                 }
                 else if (userInput == search)
                 {
-                    Output(SearchTitle(names), names, jobs);
+                    SearchTitle(names, jobs);
                 }
                 else if (userInput == delete)
                 {
-                    DeleteTitle(ref names,ref jobs);
+                    DeleteTitle(ref names, ref jobs);
                 }
             }
-        }
-
-        static void Output(int nameInex, string[] names, string[] jobs)
-        {
-            int errorCode = -1;
-            if (nameInex != errorCode)
-            {
-                Console.WriteLine($"{names[nameInex]} - {jobs[nameInex]}");
-            };
         }
 
         static void Output(string[] names, string[] jobs)
@@ -79,7 +70,7 @@ namespace ConsoleApp5
             return newArray;
         }
         static void DeleteTitle(ref string[] names, ref string[] jobs)
-        { 
+        {
             int nameIndex = SearchTitle(names);
             names = ArrayReduction(names, nameIndex);
             jobs = ArrayReduction(jobs, nameIndex);
@@ -108,13 +99,27 @@ namespace ConsoleApp5
             string searchingName = Console.ReadLine();
             for (int i = 0; i <= names.Length; i++)
             {
-                if (names[i] == searchingName)
+                if (names[i].Split(' ')[0] == searchingName)
                 {
                     return i;
                 }
             }
             Console.WriteLine("Такого сотрудника не найдено");
             return errorCode;
+        }
+
+        static void SearchTitle(string[] names, string[] jobs)
+        {
+            Console.Write("Введите фамилию человека: ");
+            string searchingName = Console.ReadLine();
+            for (int i = 0; i < names.Length; i++)
+            {
+                if (names[i].Split(' ')[0] == searchingName)
+                {
+                    Console.WriteLine(names[i] + " - " + jobs[i]);
+                }
+            }
+            Console.WriteLine("Такого сотрудника не найдено");
         }
     }
 }
