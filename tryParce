@@ -6,12 +6,11 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-
-            int userNumber = TryToConvert();
+            int userNumber = GetNumber();
             Console.WriteLine("Введено число " + userNumber);
         }
 
-        static  int TryToConvert()
+        static  int GetNumber()
         {
             int userNumber = 0;
             bool numberChecked = false;
