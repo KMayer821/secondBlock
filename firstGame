@@ -60,11 +60,20 @@ namespace ConsoleApp1
                     }
                     break;
             }
-            if (map[userY, userX] == 'A')
+            if (map[userY, userX] != '#' || map[userY, userX] != ' ')
             {
-                score++;
+                score += GetItem(map[userY, userX]);
             }
             Console.Clear();
+        }
+
+        static int GetItem(char item)
+        {
+            if (item == 'A')
+            {
+                return 1;
+            }
+            else return 0;
         }
 
         static void DrawMap(char[,] map, int userY, int userX)
