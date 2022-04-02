@@ -1,0 +1,83 @@
+using System;
+
+namespace ConsoleApp1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int userYPosition = 1;
+            int userXPosition = 1;
+            int score = 0;
+            char[,] map = {{'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' },
+                           {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
+                           {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'A', ' ', ' ', '#' },
+                           {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
+                           {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
+                           {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
+                           {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
+                           {'#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#' },
+                           {'#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#' } };
+            while (score == 0)
+            {
+                GetUserPosition(ref map, ref userXPosition, ref userYPosition, ref score);
+            }
+            Console.WriteLine("U WON");
+        }
+
+        static void GetUserPosition(ref char[,] map, ref int userX, ref int userY, ref int score)
+        {
+            DrawMap(map, userY, userX);
+            ConsoleKeyInfo key = Console.ReadKey();
+            switch (key.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    if (map[userY - 1, userX] != '#')
+                    {
+                        map[userY, userX] = ' ';
+                        userY--;
+                    }
+                    break;
+                case ConsoleKey.DownArrow:
+                    if (map[userY + 1, userX] != '#')
+                    {
+                        map[userY, userX] = ' ';
+                        userY++;
+                    }
+                    break;
+                case ConsoleKey.RightArrow:
+                    if (map[userY, userX + 1] != '#')
+                    {
+                        map[userY, userX] = ' ';
+                        userX++;
+                    }
+                    break;
+                case ConsoleKey.LeftArrow:
+                    if (map[userY, userX - 1] != '#')
+                    {
+                        map[userY, userX] = ' ';
+                        userX--;
+                    }
+                    break;
+            }
+            if (map[userY, userX] == 'A')
+            {
+                score++;
+            }
+            Console.Clear();
+        }
+
+        static void DrawMap(char[,] map, int userY, int userX)
+        {
+            map[userY, userX] = '@';
+            for (int i = 0; i < map.GetLength(0); i++)
+            {
+                for (int j = 0; j < map.GetLength(1); j++)
+                {
+                    Console.Write(map[i, j]);
+                }
+                Console.Write("\n");
+            }
+        }        
+    }
+}
