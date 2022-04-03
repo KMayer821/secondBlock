@@ -1,0 +1,43 @@
+using System;
+
+namespace ConsoleApp1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<string> firstList = new List<string>();
+            List<string> secondList = new List<string>();
+            List<string> finalList = new List<string>();
+            firstList.Add("1");
+            firstList.Add("2");
+            firstList.Add("3");
+            firstList.Add("asdfg");
+            secondList.Add("2");
+            secondList.Add("4");
+            secondList.Add("4");
+            secondList.Add("4");
+            secondList.Add("4");
+            Unification(firstList, secondList, finalList);
+        }
+
+        static void Unification(List<string> firstList, List<string> secondList, List<string> finalList)
+        {
+            finalList.AddRange(firstList);
+            finalList.AddRange(secondList);
+            finalList.Sort();
+            for (int i = 0; i < finalList.Count - 1; i++)
+            {
+                if (finalList[i] == finalList[i + 1])
+                {
+                    finalList.RemoveAt(i);
+                    i--;
+                }
+            }
+            foreach (var item in finalList)
+            {
+                Console.WriteLine(item);
+            }
+        }
+    }
+}
