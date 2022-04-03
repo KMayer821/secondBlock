@@ -1,0 +1,68 @@
+using System;
+
+namespace ConsoleApp1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string stopWord = "выход";
+            string addUser = "добавить";
+            string deletUser = "удалить";
+            string showUsers = "вывести";
+            Dictionary<string, string> userDictionary = new Dictionary<string, string>();
+            Console.WriteLine($"Введие {addUser} для добавления сотрудника");
+            Console.WriteLine($"Введие {showUsers} для отображения всех досье");
+            Console.WriteLine($"Введие {deletUser} для удаления досье");
+            Console.WriteLine($"Введие {stopWord} для выхода");
+            string userInput = "";
+            while (userInput != stopWord)
+            {
+                userInput = Console.ReadLine();
+                if (userInput == addUser)
+                {
+                    AddUser(ref userDictionary);
+                }
+                else if (userInput == deletUser)
+                {
+                    DeleteUser(ref userDictionary);
+                }
+                else if (userInput == showUsers)
+                {
+                    ShowAllUsers(userDictionary);
+                }
+            }
+        }
+
+        static void AddUser(ref Dictionary<string, string> userDictionary)
+        {
+            Console.WriteLine("Введите фамилию нового сотрудника");
+            string userName = Console.ReadLine();
+            Console.WriteLine("Введите должность нового сотрудника");
+            string userJob = Console.ReadLine();
+            userDictionary.Add(userName, userJob);
+        }
+
+        static void DeleteUser(ref Dictionary<string,string> userDictionary)
+        {
+            Console.WriteLine("Введите имя сотрудника, досье которого вы хотите удалить");
+            string deletingUser = Console.ReadLine();
+            if (userDictionary.ContainsKey(deletingUser) == false)
+            {
+                Console.WriteLine("Сотрудника с такой фамилией не найдено");
+            }
+            else
+            {
+                userDictionary.Remove(deletingUser);
+            }
+        }
+
+        static void ShowAllUsers(Dictionary<string,string> userDictionary)
+        {
+            foreach (var user in userDictionary)
+            {
+                Console.WriteLine($"{user.Key} - {user.Value}");
+            }
+        }
+    }
+}
