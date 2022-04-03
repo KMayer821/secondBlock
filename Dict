@@ -1,0 +1,32 @@
+using System;
+
+namespace ConsoleApp1
+{
+    internal class Programm
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Введите имя человека");
+            Dictionary<string, int> agesByName = new Dictionary<string, int>();
+            agesByName.Add("Анатолий", 36);
+            agesByName.Add("Петр", 34);
+            agesByName.Add("Илья", 28);
+            string userInput = Console.ReadLine();
+            Console.WriteLine(GetNumberByWord(userInput, agesByName));
+        }
+
+        static string GetNumberByWord(string userWord, Dictionary<string, int> agesByName)
+        {
+            string errorMessage = "Данного имени не найдено в словаре";
+            string[] correctMessage = { "ему ", " лет (года)" };
+            foreach (var age in agesByName)
+            {
+                if (age.Key == userWord)
+                {
+                    return (correctMessage[0] + Convert.ToString(age.Value) + correctMessage[1]);
+                }
+            }
+            return errorMessage;
+        }
+    }
+}
