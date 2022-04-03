@@ -10,25 +10,25 @@ namespace ConsoleApp1
             string stopWord = "exit";
             string sumWord = "sum";
             string userInput = "";
-            int userNumber;
+            int userNumber = 0;
+            bool checkInput = true;
             Console.WriteLine("Введите число");
 
             while (userInput != stopWord)
             {
                 userInput = Console.ReadLine();
+                checkInput = int.TryParse(userInput, out userNumber);
                 if (userInput == sumWord)
                 {
                     Sum(array);
-                    continue;
                 }
-                try
-                {
-                    userNumber = Convert.ToInt32(userInput);
+                else if (checkInput == true)
+                { 
                     array.Add(userNumber);
                 }
-                catch
+                else if (checkInput == false)
                 {
-                    Console.WriteLine("Введите число");
+                    Console.WriteLine("Некорректный ввод.");
                 }
             }
         }
