@@ -23,11 +23,11 @@ namespace ConsoleApp1
 
                 if (userInput == addUser)
                 {
-                    AddUser(ref userDictionary);
+                    userDictionary = AddUser(ref userDictionary);
                 }
                 else if (userInput == deletUser)
                 {
-                    DeleteUser(ref userDictionary);
+                    userDictionary = DeleteUser(ref userDictionary);
                 }
                 else if (userInput == showUsers)
                 {
@@ -36,7 +36,7 @@ namespace ConsoleApp1
             }
         }
 
-        static void AddUser(ref Dictionary<string, string> userDictionary)
+        static Dictionary<string, string> AddUser(ref Dictionary<string, string> userDictionary)
         {
             Console.WriteLine("Введите фамилию нового сотрудника");
             string userName = Console.ReadLine();
@@ -51,9 +51,10 @@ namespace ConsoleApp1
             {
                 Console.WriteLine("Данные об этом сотруднике уже внесены");
             }
+            return userDictionary;
         }
 
-        static void DeleteUser(ref Dictionary<string,string> userDictionary)
+        static Dictionary<string, string> DeleteUser(ref Dictionary<string,string> userDictionary)
         {
             Console.WriteLine("Введите имя сотрудника, досье которого вы хотите удалить");
             string deletingUser = Console.ReadLine();
@@ -66,6 +67,7 @@ namespace ConsoleApp1
             {
                 userDictionary.Remove(deletingUser);
             }
+            return userDictionary;
         }
 
         static void ShowAllUsers(Dictionary<string,string> userDictionary)
