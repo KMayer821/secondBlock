@@ -1,0 +1,46 @@
+using System;
+
+namespace ConsoleApp1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> array = new List<int>();
+            string stopWord = "exit";
+            string sumWord = "sum";
+            string userInput = "";
+            int userNumber;
+            Console.WriteLine("Введите число");
+
+            while (userInput != stopWord)
+            {
+                userInput = Console.ReadLine();
+                if (userInput == sumWord)
+                {
+                    Sum(array);
+                    continue;
+                }
+                try
+                {
+                    userNumber = Convert.ToInt32(userInput);
+                    array.Add(userNumber);
+                }
+                catch
+                {
+                    Console.WriteLine("Введите число");
+                }
+            }
+        }
+
+        static void Sum(List<int> array)
+        {
+            int sum = 0;
+            for (int i = 0; i < array.Count; i++)
+            {
+                sum += array[i];
+            }
+            Console.WriteLine(sum);
+        }
+    }
+}
