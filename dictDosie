@@ -16,9 +16,11 @@ namespace ConsoleApp1
             Console.WriteLine($"Введие {deletUser} для удаления досье");
             Console.WriteLine($"Введие {stopWord} для выхода");
             string userInput = "";
+
             while (userInput != stopWord)
             {
                 userInput = Console.ReadLine();
+
                 if (userInput == addUser)
                 {
                     AddUser(ref userDictionary);
@@ -38,15 +40,24 @@ namespace ConsoleApp1
         {
             Console.WriteLine("Введите фамилию нового сотрудника");
             string userName = Console.ReadLine();
-            Console.WriteLine("Введите должность нового сотрудника");
-            string userJob = Console.ReadLine();
-            userDictionary.Add(userName, userJob);
+
+            if (userDictionary.ContainsKey(userName) == false)
+            {
+                Console.WriteLine("Введите должность нового сотрудника");
+                string userJob = Console.ReadLine();
+                userDictionary.Add(userName, userJob);
+            }
+            else
+            {
+                Console.WriteLine("Данные об этом сотруднике уже внесены");
+            }
         }
 
         static void DeleteUser(ref Dictionary<string,string> userDictionary)
         {
             Console.WriteLine("Введите имя сотрудника, досье которого вы хотите удалить");
             string deletingUser = Console.ReadLine();
+
             if (userDictionary.ContainsKey(deletingUser) == false)
             {
                 Console.WriteLine("Сотрудника с такой фамилией не найдено");
