@@ -12,21 +12,15 @@ namespace ConsoleApp1
             agesByName.Add("Петр", 34);
             agesByName.Add("Илья", 28);
             string userInput = Console.ReadLine();
-            Console.WriteLine(GetNumberByWord(userInput, agesByName));
-        }
-
-        static string GetNumberByWord(string userWord, Dictionary<string, int> agesByName)
-        {
-            string errorMessage = "Данного имени не найдено в словаре";
-            string[] correctMessage = { "ему ", " лет (года)" };
-            foreach (var age in agesByName)
+            int value = 0;
+            if (agesByName.TryGetValue(userInput, out value) == true)
             {
-                if (age.Key == userWord)
-                {
-                    return (correctMessage[0] + Convert.ToString(age.Value) + correctMessage[1]);
-                }
+                Console.WriteLine(value);
             }
-            return errorMessage;
+            else
+            {
+                Console.WriteLine("Данного имени не найдено в словаре");
+            }
         }
     }
 }
