@@ -1,44 +1,34 @@
 using System;
 
-namespace ConsoleApp1
+namespace ConsoleApp
 {
-    internal class Program
+    internal class Unique
     {
         static void Main(string[] args)
         {
-            List<string> firstList = new List<string>();
-            List<string> secondList = new List<string>();
-            List<string> finalList = new List<string>();
-            firstList.Add("1");
-            firstList.Add("2");
-            firstList.Add("3");
-            firstList.Add("asdfg");
-            secondList.Add("2");
-            secondList.Add("4");
-            secondList.Add("4");
-            secondList.Add("4");
-            secondList.Add("4");
-            Unification(firstList, secondList, finalList);
-        }
+            List<string> firstList = new List<string>() { "1", "2", "3", "4", "5"};
+            List<string> secondList = new List<string>() { "3", "2", "5", "6", "10"};
+            List<string> uniqueList = new List<string>();
+            uniqueList.AddRange(firstList);
 
-        static void Unification(List<string> firstList, List<string> secondList, List<string> finalList)
-        {
-            finalList.AddRange(firstList);
-            finalList.AddRange(secondList);
-            finalList.Sort();
-
-            for (int i = 0; i < finalList.Count - 1; i++)
+            for (int i = 0 ; i < uniqueList.Count; i++)
             {
-                if (finalList[i] == finalList[i + 1])
+                Console.Write(uniqueList[i] + " ");
+            }
+
+            Console.WriteLine();
+
+            for (int i = 0; i < secondList.Count; i++)
+            {
+                if (uniqueList.Contains(secondList[i]) == false)
                 {
-                    finalList.RemoveAt(i);
-                    i--;
+                    uniqueList.Add(secondList[i]);
                 }
             }
 
-            foreach (var listElement in finalList)
+            for (int i = 0; i < uniqueList.Count; i++)
             {
-                Console.WriteLine(listElement);
+                Console.Write(uniqueList[i] + " ");
             }
         }
     }
