@@ -7,41 +7,47 @@ namespace ConsoleApp5
         {
             string[] names = new string[0];
             string[] jobs = new string[0];
-            string add = "добавить";
-            string output = "вывести";
-            string delete = "удалить";
-            string search = "поиск";
-            string exit = "выход";
+            string addTitleWord = "добавить";
+            string outpuWord = "вывести";
+            string deleteWord = "удалить";
+            string searchWord = "поиск";
+            string exitWord = "выход";
             string userInput = "";
-            Console.WriteLine($"Введие {add} для добавления сотрудника");
-            Console.WriteLine($"Введие {output} для отображения всех досье");
-            Console.WriteLine($"Введие {delete} для удаления досье");
-            Console.WriteLine($"Введие {search} для поиска сотрудника по фамилии");
-            Console.WriteLine($"Введие {exit} для выхода");
+            bool isWorking = true;
+            Console.WriteLine($"Введие {addTitleWord} для добавления сотрудника");
+            Console.WriteLine($"Введие {outpuWord} для отображения всех досье");
+            Console.WriteLine($"Введие {deleteWord} для удаления досье");
+            Console.WriteLine($"Введие {searchWord} для поиска сотрудника по фамилии");
+            Console.WriteLine($"Введие {exitWord} для выхода");
 
-            while (userInput != exit)
+            while (isWorking == true)
             {
                 userInput = Console.ReadLine();
-                if (userInput == add)
+
+                if (userInput == addTitleWord)
                 {
                     AddTitle(ref names, ref jobs);
                 }
-                else if (userInput == output)
+                else if (userInput == outpuWord)
                 {
-                    Output(names, jobs);
+                    OutputAllTitles(names, jobs);
                 }
-                else if (userInput == search)
+                else if (userInput == searchWord)
                 {
                     SearchTitle(names, jobs);
                 }
-                else if (userInput == delete)
+                else if (userInput == deleteWord)
                 {
                     DeleteTitle(ref names, ref jobs);
+                }
+                else if (userInput == exitWord)
+                {
+                    isWorking = false;
                 }
             }
         }
 
-        static void Output(string[] names, string[] jobs)
+        static void OutputAllTitles(string[] names, string[] jobs)
         {
             for (int i = 0; i < names.Length; i++)
             {
@@ -55,71 +61,99 @@ namespace ConsoleApp5
             string addName = Console.ReadLine();
             Console.Write("Введите должность нового сотрудника: ");
             string addJob = Console.ReadLine();
-            names = ArrayExtension(names, addName);
-            jobs = ArrayExtension(jobs, addJob);
+            names = AddData(names, addName);
+            jobs = AddData(jobs, addJob);
         }
 
-        static string[] ArrayExtension(string[] inputArray, string newElement)
+        static string[] AddData(string[] inputArray, string newElement)
         {
             string[] newArray = new string[inputArray.Length + 1];
+
             for (int i = 0; i < inputArray.Length; i++)
             {
                 newArray[i] = inputArray[i];
             }
+
             newArray[newArray.Length - 1] = newElement;
             return newArray;
         }
         static void DeleteTitle(ref string[] names, ref string[] jobs)
         {
             int nameIndex = SearchTitle(names);
-            names = ArrayReduction(names, nameIndex);
-            jobs = ArrayReduction(jobs, nameIndex);
+
+            if (nameIndex != -1)
+            {
+                names = DeleteData(names, nameIndex);
+                jobs = DeleteData(jobs, nameIndex);
+            }
         }
 
-        static string[] ArrayReduction(string[] inputArray, int elementIndex)
+        static string[] DeleteData (string[] inputArray, int elementIndex)
         {
             string[] newArray = new string[inputArray.Length - 1];
             int nextTempArrayIndex = 0;
+
             for (int i = 0; i < inputArray.Length; i++)
             {
                 if (i == elementIndex)
                 {
                     continue;
                 }
+
                 newArray[nextTempArrayIndex] = inputArray[i];
                 nextTempArrayIndex++;
             }
+
             return newArray;
         }
 
         static int SearchTitle(string[] names)
         {
             int errorCode = -1;
-            Console.Write("Введите фамилию человека: ");
-            string searchingName = Console.ReadLine();
-            for (int i = 0; i <= names.Length; i++)
+            Console.Write("Введите номер дела: ");
+            int deletedTitleIndex;
+            bool isCorrectNumber = int.TryParse(Console.ReadLine(), out deletedTitleIndex);
+            string splitter = " ";
+
+            if (names.Length == 0)
             {
-                if (names[i].Split(' ')[0] == searchingName)
-                {
-                    return i;
-                }
+                Console.WriteLine("Нет ни одной записи");
+                return errorCode;
             }
-            Console.WriteLine("Такого сотрудника не найдено");
-            return errorCode;
+            
+            if (names.Length < deletedTitleIndex)
+            {
+                isCorrectNumber = false;
+            }
+
+            if (isCorrectNumber == false)
+            {
+                Console.WriteLine("Неверная запись");
+                return errorCode;
+            }
+            
+            return deletedTitleIndex - 1;
         }
 
         static void SearchTitle(string[] names, string[] jobs)
         {
             Console.Write("Введите фамилию человека: ");
             string searchingName = Console.ReadLine();
+            bool isFound = false;
+
             for (int i = 0; i < names.Length; i++)
             {
                 if (names[i].Split(' ')[0] == searchingName)
                 {
                     Console.WriteLine(names[i] + " - " + jobs[i]);
+                    isFound = true;
                 }
             }
-            Console.WriteLine("Такого сотрудника не найдено");
+
+            if (isFound == false)
+            {
+                Console.WriteLine("Такого сотрудника не найдено");
+            }
         }
     }
 }
