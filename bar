@@ -6,27 +6,30 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            float maximumMana = 10000;
-            int manaBarIndex = 10;
+            int maximumMana = 100;
             Console.WriteLine("Сколько у вас маны?");
             int mana = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine(GetBar(mana, maximumMana, manaBarIndex));
+            GetBar(mana, maximumMana);
         }
 
-        static char[] GetBar(int value, float maximumValue, int barIndex)
+        static void GetBar(int value, int maximumValue)
         {
-            float percent = value / maximumValue * barIndex;
-            char[] bar = new char[barIndex];
-            for (int i = 0; i < barIndex; i++)
-            {
-                bar[i] = '_';
-            }
-            for (int i = 0; i < percent; i++)
-            {
-                bar[i] = '#';
-            }
+            int numberOfManaInOneDivision = 10;
+            int numberOfDivisons = 10;
+            int numberOfManaSymbols = value / numberOfManaInOneDivision;
+            int numberOfEmptySymbols = numberOfDivisons - numberOfManaSymbols;
+            string manaSymbol = "#";
+            string emptyBarSymbol = "_";
+            DrawBar(manaSymbol, numberOfManaSymbols);
+            DrawBar(emptyBarSymbol, numberOfEmptySymbols);
+        }
 
-            return(bar);
+        static void DrawBar(string drawingSymbol, int numberOfSymbols)
+        {
+            for (int i = 0; i < numberOfSymbols; i++)
+            {
+                Console.Write(drawingSymbol);
+            }
         }
     }
 }
