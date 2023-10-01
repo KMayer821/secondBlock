@@ -10,16 +10,15 @@ namespace ConsoleApp1
             Console.WriteLine("Введено число " + userNumber);
         }
 
-        static  int GetNumber()
+        static int GetNumber()
         {
-            int userNumber = 0;
-            bool numberChecked = false;
-            while (numberChecked == false)
+            int userNumber;
+
+            while(int.TryParse(Console.ReadLine(),out userNumber) == false)
             {
-                Console.WriteLine("Введите число");
-                string userInput = Console.ReadLine();
-                numberChecked = int.TryParse(userInput, out userNumber);
-            }            
+                Console.WriteLine("Это не число");
+            }
+
             return userNumber;
         }
     }
