@@ -7,45 +7,50 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             string stopWord = "выход";
-            string addUser = "добавить";
-            string deletUser = "удалить";
-            string showUsers = "вывести";
-            Dictionary<string, string> userDictionary = new Dictionary<string, string>();
-            Console.WriteLine($"Введие {addUser} для добавления сотрудника");
-            Console.WriteLine($"Введие {showUsers} для отображения всех досье");
-            Console.WriteLine($"Введие {deletUser} для удаления досье");
+            string commandAddUser = "добавить";
+            string commandDeleteUser = "удалить";
+            string commandeShowUser = "вывести";
+            bool isStopWordWrited = false;
+            Dictionary<string, string> dossiers = new Dictionary<string, string>();
+            Console.WriteLine($"Введие {commandAddUser} для добавления сотрудника");
+            Console.WriteLine($"Введие {commandeShowUser} для отображения всех досье");
+            Console.WriteLine($"Введие {commandDeleteUser} для удаления досье");
             Console.WriteLine($"Введие {stopWord} для выхода");
             string userInput = "";
 
-            while (userInput != stopWord)
+            while (isStopWordWrited == false)
             {
                 userInput = Console.ReadLine();
 
-                if (userInput == addUser)
+                if (userInput == commandAddUser)
                 {
-                    AddUser(userDictionary);
+                    AddUser(dossiers);
                 }
-                else if (userInput == deletUser)
+                else if (userInput == commandDeleteUser)
                 {
-                    DeleteUser(userDictionary);
+                    DeleteUser(dossiers);
                 }
-                else if (userInput == showUsers)
+                else if (userInput == commandeShowUser)
                 {
-                    ShowAllUsers(userDictionary);
+                    ShowAllUsers(dossiers);
+                }
+                if (userInput == stopWord)
+                {
+                    isStopWordWrited = true;
                 }
             }
         }
 
-        static void AddUser(Dictionary<string, string> userDictionary)
+        static void AddUser(Dictionary<string, string> dossiers)
         {
             Console.WriteLine("Введите фамилию нового сотрудника");
             string userName = Console.ReadLine();
 
-            if (userDictionary.ContainsKey(userName) == false)
+            if (dossiers.ContainsKey(userName) == false)
             {
                 Console.WriteLine("Введите должность нового сотрудника");
                 string userJob = Console.ReadLine();
-                userDictionary.Add(userName, userJob);
+                dossiers.Add(userName, userJob);
             }
             else
             {
@@ -53,24 +58,24 @@ namespace ConsoleApp1
             }
         }
 
-        static void DeleteUser(Dictionary<string,string> userDictionary)
+        static void DeleteUser(Dictionary<string, string> dossiers)
         {
             Console.WriteLine("Введите имя сотрудника, досье которого вы хотите удалить");
             string deletingUser = Console.ReadLine();
 
-            if (userDictionary.ContainsKey(deletingUser) == false)
+            if (dossiers.ContainsKey(deletingUser) == false)
             {
                 Console.WriteLine("Сотрудника с такой фамилией не найдено");
             }
             else
             {
-                userDictionary.Remove(deletingUser);
+                dossiers.Remove(deletingUser);
             }
         }
 
-        static void ShowAllUsers(Dictionary<string,string> userDictionary)
+        static void ShowAllUsers(Dictionary<string, string> dossiers)
         {
-            foreach (var user in userDictionary)
+            foreach (var user in dossiers)
             {
                 Console.WriteLine($"{user.Key} - {user.Value}");
             }
