@@ -1,4 +1,6 @@
 using System;
+using System.Runtime.ExceptionServices;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ConsoleApp
 {
@@ -6,29 +8,41 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            List<string> firstList = new List<string>() { "1", "2", "3", "4", "5"};
-            List<string> secondList = new List<string>() { "3", "2", "5", "6", "10"};
+            string[] firstArrayOfStrings = { "1", "2", "2", "3", "5", "4"};
+            string[] secondArrayOfStrings = { "1", "7", "7", "1", "2"};
             List<string> uniqueList = new List<string>();
-            uniqueList.AddRange(firstList);
-
-            for (int i = 0 ; i < uniqueList.Count; i++)
-            {
-                Console.Write(uniqueList[i] + " ");
-            }
-
+            uniqueList.AddRange(firstArrayOfStrings);
+            uniqueList.AddRange(secondArrayOfStrings);
+            ShowCollection(uniqueList);
             Console.WriteLine();
+            uniqueList = DeleteDuplicates(uniqueList);
+            ShowCollection(uniqueList);
+        }
 
-            for (int i = 0; i < secondList.Count; i++)
+        static List<string> DeleteDuplicates(List<string> listWithDuplicates)
+        {
+            List<string> listWithoutDuplicates = new List<string>();   
+
+            for(int i = 0; i < listWithDuplicates.Count; i++) 
             {
-                if (uniqueList.Contains(secondList[i]) == false)
+                if (listWithoutDuplicates.Contains(listWithDuplicates[i]))
                 {
-                    uniqueList.Add(secondList[i]);
+                    continue;
+                }
+                else
+                {
+                    listWithoutDuplicates.Add(listWithDuplicates[i]);
                 }
             }
 
-            for (int i = 0; i < uniqueList.Count; i++)
+            return listWithoutDuplicates;
+        }
+
+        static void ShowCollection(List<string> list)
+        {
+            for (int i = 0; i < list.Count; i++)
             {
-                Console.Write(uniqueList[i] + " ");
+                Console.Write(list[i] + " ");
             }
         }
     }
