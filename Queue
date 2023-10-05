@@ -12,17 +12,25 @@ namespace ConsoleApp1
             int bottomBorder = 1;
             int topBorder = 15;
             int personsInQueue = 5;
+
             for (int i = 0; i < personsInQueue; i++)
             {
                 purchases.Enqueue(random.Next(bottomBorder, topBorder));
             }
-            for (int i = 0; i < personsInQueue; i++)
+
+            while (purchases.Count != 0)
             {
-                Console.ReadLine();
-                sum += purchases.Dequeue();
+                sum += ServeVisitor(ref purchases);
                 Console.Clear();
                 Console.WriteLine("О сталось " + purchases.Count + " клиентов, сумма покупки - " + sum);
             }
+        }
+
+        static int ServeVisitor(ref Queue<int> purchases)
+        {
+            Console.ReadLine();
+            int visitorMoney = purchases.Dequeue();
+            return visitorMoney;
         }
     }
 }
