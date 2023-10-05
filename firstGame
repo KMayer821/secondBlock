@@ -21,13 +21,13 @@ namespace ConsoleApp1
 
             while (score == 0)
             {
-                GetUserPosition(ref map, ref userPositionX, ref userPositionY, ref score);
+                PlayGame(ref map, ref userPositionX, ref userPositionY, ref score);
             }
 
             Console.WriteLine("U WON");
         }
 
-        static void ChangeUserPosition(char[,] map,ref  int userPositionX,ref  int userPositionY, int newUserPostionX, int newUserPositionY)
+        static void ChangeUserPosition(char[,] map, ref int userPositionX, ref int userPositionY, int newUserPostionX, int newUserPositionY)
         {
             char wallSymbol = '#';
             char freeMapSpaceSymbol = ' ';
@@ -40,25 +40,32 @@ namespace ConsoleApp1
             }
         }
 
-        static void GetUserPosition(ref char[,] map, ref int userPositionX, ref int userPositionY, ref int score)
+        static void PlayGame(ref char[,] map, ref int userPositionX, ref int userPositionY, ref int score)
         {
             DrawMap(map, userPositionY, userPositionX);
             ConsoleKeyInfo key = Console.ReadKey();
             char wallSymbol = '#';
             char freeMapSpaceSymbol = ' ';
+            const ConsoleKey UpKey = ConsoleKey.UpArrow;
+            const ConsoleKey DownKey = ConsoleKey.DownArrow;
+            const ConsoleKey RightKey = ConsoleKey.RightArrow;
+            const ConsoleKey LeftKey = ConsoleKey.LeftArrow;
 
             switch (key.Key)
             {
-                case ConsoleKey.UpArrow:
-                    ChangeUserPosition(map, ref userPositionX,ref  userPositionY, userPositionX, userPositionY - 1);
+                case UpKey:
+                    ChangeUserPosition(map, ref userPositionX, ref userPositionY, userPositionX, userPositionY - 1);
                     break;
-                case ConsoleKey.DownArrow:
+
+                case DownKey:
                     ChangeUserPosition(map, ref userPositionX, ref userPositionY, userPositionX, userPositionY + 1);
                     break;
-                case ConsoleKey.RightArrow:
+
+                case RightKey:
                     ChangeUserPosition(map, ref userPositionX, ref userPositionY, userPositionX + 1, userPositionY);
                     break;
-                case ConsoleKey.LeftArrow:
+
+                case LeftKey:
                     ChangeUserPosition(map, ref userPositionX, ref userPositionY, userPositionX - 1, userPositionY);
                     break;
             }
@@ -73,17 +80,23 @@ namespace ConsoleApp1
 
         static int GetItem(char item)
         {
-            if (item == 'A')
+            char targetSymbol = 'A';
+
+            if (item == targetSymbol)
             {
                 return 1;
             }
 
-            else return 0;
+            else
+            {
+                return 0;
+            }    
         }
 
         static void DrawMap(char[,] map, int userPositionY, int userPositionX)
         {
-            map[userPositionY, userPositionX] = '@';
+            char userSymbol = '@'; 
+            map[userPositionY, userPositionX] = userSymbol;
 
             for (int i = 0; i < map.GetLength(0); i++)
             {
@@ -91,6 +104,7 @@ namespace ConsoleApp1
                 {
                     Console.Write(map[i, j]);
                 }
+
                 Console.Write("\n");
             }
         }
