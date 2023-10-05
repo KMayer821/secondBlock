@@ -9,10 +9,10 @@ namespace ConsoleApp1
             int maximumMana = 100;
             Console.WriteLine("Сколько у вас маны?");
             int mana = Convert.ToInt32(Console.ReadLine());
-            GetBar(mana, maximumMana);
+            DrawBar(mana, maximumMana);
         }
 
-        static void GetBar(int value, int maximumValue)
+        static void DrawBar(int value, int maximumValue)
         {
             int numberOfManaInOneDivision = 10;
             int numberOfDivisons = 10;
@@ -20,11 +20,11 @@ namespace ConsoleApp1
             int numberOfEmptySymbols = numberOfDivisons - numberOfManaSymbols;
             string manaSymbol = "#";
             string emptyBarSymbol = "_";
-            DrawBar(manaSymbol, numberOfManaSymbols);
-            DrawBar(emptyBarSymbol, numberOfEmptySymbols);
+            OutputBar(manaSymbol, numberOfManaSymbols);
+            OutputBar(emptyBarSymbol, numberOfEmptySymbols);
         }
 
-        static void DrawBar(string drawingSymbol, int numberOfSymbols)
+        static void OutputBar(string drawingSymbol, int numberOfSymbols)
         {
             for (int i = 0; i < numberOfSymbols; i++)
             {
